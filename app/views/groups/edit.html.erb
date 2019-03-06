@@ -1,0 +1,17 @@
+<center>
+<h1> <%= @group.name %> </h1>
+<%= form_for(@group) do |t| %>
+<h6>Edit Name</h6>
+<%= t.text_field :name %>
+<%= t.submit %>
+<% end %>
+<h3> Members </h3>
+<% Role.where(group_id: @group.id).each do |q| %>
+<% User.where(id:q.user_id).each do |x| %>
+<% role = Role.where(group_id: q.id, user_id: x.id)[0] %>
+<p> <%= x.first_name + " " + x.last_name %> ||
+<%= link_to "Remove", group_role_path(@group.id,q.id), :method => :delete %></p>
+<% end %><br>
+<% end %>
+<%= link_to "Delete Group", group_path(@group.id), :method => :delete, class: "btn btn-primary" %>
+</center>

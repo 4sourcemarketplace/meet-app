@@ -1,0 +1,21 @@
+<center>
+<h1> <%= @group.name %> </h1>
+<h3> Members </h3>
+<% Role.where(group_id: @group.id).each do |q| %>
+<% User.where(id: q.user_id).each do |x| %>
+<% role = Role.where(group_id: q.id, user_id: x.id)[0] %>
+<% if q["organizer"] == true %>
+<p> <%= x.first_name + " " + x.last_name %>: Organizer </p>
+<% end %>
+
+<% if q["presenter"] == true %>
+<p> <%= x.first_name + " " + x.last_name %>: Presenter </p>
+<% end %>
+
+<% if q["participant"] %>
+<p> <%= x.first_name + " " + x.last_name %>: Participant </p>
+<% end %>
+<% end %>
+<% end %>
+<%= link_to "Edit", edit_group_path(@group) %>
+</center>

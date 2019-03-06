@@ -1,0 +1,8 @@
+<center>
+<h1>Welcome to the Meet Up App!</h1>
+<h3>Please Input your CSV</h3>
+<%=form_tag import_groups_path, multipart:true do %>
+<%= file_field_tag :file %><br><br>
+<%= submit_tag "Import CSV", class:"btn-primary" %>
+<% end %>
+</center>

@@ -1,0 +1,16 @@
+<center>
+<h1>Our Groups</h1>
+<% @groups.each do |g| %>
+  <h3><%= link_to g.name, group_path(g) %></h3>
+  <h6>Organizer(s)</h6>
+  <div class="table-items">
+  <table>
+    <% Role.where(group_id: g.id, organizer:true).each do |q|%>
+    <% User.where(id: q.user_id).each do |x|%>
+    <tr><%= x.first_name + " " + x.last_name %></tr><br>
+    <% end %>
+    <% end %>
+  </table>
+  </div>
+  <% end %>
+</center>
